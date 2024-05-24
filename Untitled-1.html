@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 2px solid orangered;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="500"></canvas>
+    <script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let slonce = 0;
+        let zielony =  128;
+        let zielony2 = 30;
+
+        function rysowanie(x, y) {
+            ctx.beginPath();
+            ctx.arc(x, y, 40, 0, Math.PI * 2, true);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function animacja() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillRect(0, 500, 0, 800)
+            ctx.strokeStyle = 'rgb(0, '+zielony+', '+zielony2+')';
+                ctx.fillStyle = 'rgb(0, '+zielony+', '+zielony2+')';
+                ctx.fillRect(270, 400, 260, 20);
+                ctx.closePath();
+                if (zielony > 48) {
+                    zielony -= 0.3;
+                }
+                if (zielony2 > 59) {
+                    zielony2 -= 0.3;
+                }
+                
+
+
+
+            ctx.fillStyle = 'grey';
+            ctx.fillRect(300, 250, 200, 150);
+
+            
+            ctx.beginPath();
+            ctx.moveTo(280, 250);
+            ctx.lineTo(520, 250);
+            ctx.lineTo(400, 150);
+            ctx.closePath();
+            ctx.fillStyle = 'red';
+            ctx.fill();
+
+            
+            ctx.fillStyle = 'black';
+            ctx.fillRect(370, 320, 60, 80);
+
+
+
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(320, 270, 50, 50);
+            ctx.fillRect(430, 270, 50, 50);
+
+            rysowanie(slonce, 100);
+
+            slonce += 1;
+
+            if (slonce > canvas.width + 40) {
+                slonce = -40;
+            }
+
+            requestAnimationFrame(animacja);
+        }
+
+        animacja();
+        
+    </script>
+</body>
+</html>
